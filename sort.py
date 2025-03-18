@@ -1,10 +1,21 @@
 import json
 import os
 import shutil
+import kagglehub
 
-json_path = "data/train_dataset/train.json"
-images_root = "data/train_dataset/train_images"
-output_root = "data/train_dataset/sorted_images"
+
+dataset_path = kagglehub.dataset_download("wjybuqi/traffic-light-detection-dataset")
+
+dest_dir = "/"
+os.makedirs(dest_dir, exist_ok=True)
+for file in os.listdir(dataset_path):
+    shutil.move(os.path.join(dataset_path, file), os.path.join(dest_dir, file))
+print("Pobrano dane do:", dataset_path)
+
+
+json_path = "train_dataset/train.json"
+images_root = "train_dataset/train_images"
+output_root = "train_dataset/sorted_images"
 
 with open(json_path, "r", encoding="utf-8") as f:
     data = json.load(f)
