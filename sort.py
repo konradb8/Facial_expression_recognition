@@ -3,7 +3,6 @@ import os
 import shutil
 import kagglehub
 
-
 dataset_path = kagglehub.dataset_download("wjybuqi/traffic-light-detection-dataset")
 
 dest_dir = "/"
@@ -25,7 +24,7 @@ for annotation in data["annotations"]:
     file_path = os.path.join(images_root, os.path.basename(filename))
 
     if not os.path.exists(file_path):
-        print(f"Plik {file_path} nie istnieje, pomijam...")
+        print(f"File {file_path} does not exist.")
         continue
 
     colors = set(inbox["color"] for inbox in annotation.get("inbox", []))
@@ -39,6 +38,6 @@ for annotation in data["annotations"]:
 
         target_path = os.path.join(color_dir, os.path.basename(filename))
         shutil.copy2(file_path, target_path)
-        print(f"Skopiowano {file_path} -> {target_path}")
+        print(f"Copied {file_path} -> {target_path}")
 
-print("Sortowanie zakończone!")
+print("Images sorted!")
